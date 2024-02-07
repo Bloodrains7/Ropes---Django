@@ -2,7 +2,7 @@ from django_reverse_admin import ReverseModelAdmin
 from django.contrib import admin
 
 from udigital.forms import UserAdminForm
-from udigital.models import PhoneNumber, User, Post
+from udigital.models import User, Post, Comment
 
 
 class UserAdmin(ReverseModelAdmin):
@@ -44,5 +44,20 @@ class PostAdmin(admin.ModelAdmin):
         return False
 
 
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('post', 'comment')
+    list_filter = ('timestamp',)
+    search_fields = ('post', 'user')
+    readonly_fields = ('post', 'user')
+    list_per_page = 50
+
+    def get_ordering(self, request):
+        return ('-timestamp',)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
 admin.site.register(User, UserAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment, CommentAdmin)
