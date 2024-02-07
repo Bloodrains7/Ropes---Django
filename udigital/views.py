@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, get_object_or_404
@@ -19,10 +18,10 @@ def list_posts(request):
     return render(request, 'posts/list.html', context)
 
 
-def detail_post(request, post_id):
-    post = Post.objects.all()
+def detail_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
     context = {'post': post}
-    return render(request, 'posts/details.html', context)
+    return render(request, 'post/detail.html', context)
 
 
 def create_post(request):
@@ -34,20 +33,7 @@ def create_post(request):
         else:
             form = PostForm()
         context = {'form': form}
-        return render(request, 'posts/add.html', context)
-
-
-def edit_post(request, post_id):
-    post = Post.objects.get(id=post_id)
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('list_posts')
-    else:
-        form = PostForm(instance=post)
-    context = {'form': form}
-    return render(request, 'posts/edit.html', context)
+        return render(request, 'post/add.html', context)
 
 
 def create_comment(request):
@@ -59,7 +45,7 @@ def create_comment(request):
     else:
         form = CommentForm()
     context = {'form': form}
-    return render(request, 'posts/details.html', context)
+    return render(request, 'post/details.html', context)
 
 
 class PostListView(ListAPIView):
