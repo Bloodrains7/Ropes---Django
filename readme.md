@@ -26,3 +26,19 @@ docker-compose up
 
 ## Stop
 docker-compose down
+
+# Admin Console
+
+## Url
+http://localhost:8000/admin/login/?next=/admin/
+
+## User
+andywhite@mail.com
+
+## Password
+test
+
+# Swagger
+
+## Url
+http://localhost:8000/api/v1/swagger
