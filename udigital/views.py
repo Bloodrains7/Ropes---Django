@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.generics import ListAPIView, get_object_or_404
@@ -34,6 +34,7 @@ def post_create(request):
         serializer = PostCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        return redirect('list_posts')
     posts = Post.objects.all()
     context = {'posts': posts}
     return render(request, 'posts/list.html', context)
@@ -49,6 +50,7 @@ def comment_create(request, pk):
         serializer = CommentCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         serializer.save()
+        return redirect('post_detail', pk=pk)
 
     post = get_object_or_404(Post, pk=pk)
     context = {'post': post}
