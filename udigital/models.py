@@ -1,17 +1,18 @@
-from django.contrib.auth.models import AbstractUser, Group
+import reversion
 from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import AbstractUser, Group
 from django.db import models
 
 SUPER_ADMIN = 1
 
 
+@reversion.register()
 class PhoneNumber(models.Model):
     id = models.AutoField(primary_key=True)
     dial_code = models.CharField(max_length=5, default='+421')
-    country_code = models.CharField(max_length=2, default='SK')
     number = models.CharField(max_length=15)
 
-    REQUIRED_FIELDS = ['dial_code', 'country_code', 'number']
+    REQUIRED_FIELDS = ['dial_code', 'number']
 
     def delete(self, *args, **kwargs):
         raise Exception("You cannot delete this object.")
@@ -45,23 +46,35 @@ class UserManager(BaseUserManager):
         return user
 
 
+@reversion.register()
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=254, unique=True)
-    phone_number = models.ForeignKey(PhoneNumber, on_delete=models.PROTECT)
+    phone_number = models.ForeignKey(PhoneNumber, on_delete=models.PROTECT, related_name='users')
     password = models.CharField(max_length=20, default=False)
+    last_login = models.DateTimeField(null=True)
+    is_superuser = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_chauffeur = models.BooleanField(default=False)
+    is_customer = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_first_login = models.BooleanField(default=False)
     username = None
 
+    objects = UserManager()
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'email', 'phone_number']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone_number']
 
     def delete(self, *args, **kwargs):
         raise Exception("You cannot delete this object.")
 
     def __str__(self):
         return '{} {} - {}'.format(self.first_name, self.last_name, self.email)
+
+    class Meta:
+        verbose_name_plural = 'users'
 
 
 class Post(models.Model):
@@ -76,6 +89,9 @@ class Post(models.Model):
     def __str__(self):
         return '{} - {}'.format(self.title, self.author)
 
+    class Meta:
+        verbose_name_plural = 'posts'
+
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
@@ -88,3 +104,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return '{} - {}'.format(self.post, self.user)
+
+    class Meta:
+        verbose_name_plural = 'comments'

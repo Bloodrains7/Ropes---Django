@@ -1,0 +1,18 @@
+[
+  {
+    "model": "udigital.phonenumber",
+    "pk": 1,
+    "fields": {
+      "dial_code": "+421",
+      "number": "911 222 333"
+    }
+  },
+    {
+    "model": "udigital.phonenumber",
+    "pk": 2,
+    "fields": {
+      "dial_code": "+421",
+      "number": "911 222 555"
+    }
+  }
+]

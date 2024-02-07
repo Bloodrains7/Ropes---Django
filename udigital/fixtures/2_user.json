@@ -1,0 +1,28 @@
+[
+  {
+    "model": "udigital.user",
+    "pk": 1,
+    "fields": {
+      "date_joined": "2023-01-01T00:10:00+00:00",
+      "first_name": "Andy",
+      "last_name": "White",
+      "email": "andywhite@mail.com",
+      "phone_number": 1,
+      "password": "pbkdf2_sha256$390000$KcvBk8yfOvKWa9lRs0XA2k$03FXf9XI1yHr15aYbsTQvYC3zZxMg/kR6KsEYDiJp50=",
+      "is_staff": true,
+      "is_superuser": true
+    }
+  },
+  {
+    "model": "udigital.user",
+    "pk": 2,
+    "fields": {
+      "date_joined": "2023-01-01T00:10:00+00:00",
+      "first_name": "John",
+      "last_name": "Brown",
+      "email": "johnbrown@mail.com",
+      "phone_number": 2,
+      "password": "pbkdf2_sha256$390000$KcvBk8yfOvKWa9lRs0XA2k$03FXf9XI1yHr15aYbsTQvYC3zZxMg/kR6KsEYDiJp50="
+    }
+  }
+]

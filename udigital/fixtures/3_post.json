@@ -1,0 +1,22 @@
+[
+  {
+    "model": "udigital.post",
+    "pk": 1,
+    "fields": {
+      "title": "Java 21",
+      "content": "Příručka podrobně vysvětluje vlastnosti dvacáté první verze jazyka Java. Provede čtenáře všemi zákoutími jazyka od naprostých základů až po pokročilé konstrukce. Probírá všechny prvky jazyka včetně těch, které jsou začleněny pouze jako předběžné a standardní součástí se stanou až v některé z příštích verzí. Současně ukazuje, jak tyto předběžné konstrukce aktivovat a vyzkoušet.\n\nVýklad je koncipovaný tak, že kniha poslouží jako učebnice i jako referenční příručka. Bude proto užitečná pro začátečníky i pokročilé programátory, kteří v ní najdou vysvětlení příčin řady problémů, s nimiž se denně setkávají, spolu s návody na jejich řešení. Vysvětluje podrobně i témata, která ostatní učebnice kvůli nedostatku místa opomíjejí a nutí tak programátory někdy postupovat metodou pokusů a omylů.",
+      "author": 1,
+      "publication_date": "2023-01-01"
+    }
+  },
+  {
+    "model": "udigital.post",
+    "pk": 2,
+    "fields": {
+      "title": "Deep learning v jazyku Python",
+      "content": "Strojové učení zaznamenalo v posledních letech pozoruhodný pokrok a dospělo od téměř nepoužitelného rozpoznávání řeči a obrazu k téměř nadlidské přesnosti, od programů, které nedokázaly porazit jen trochu zkušenějšího hráče šachu, až k přemožitelům mistrů světa.\n\nZa pokrokem ve vývoji učících se programů stojí tzv. hluboké učení (deep learning), což je kombinace teorií a osvědčených technických postupů, které umožnily vyvinout řadu dříve nerealizovatelných aplikací. S jejich pomocí můžeme analyzovat a syntetizovat text i mluvené slovo, překládat z jazyka do jazyka, rozpoznávat osoby nebo ovládat samořídící automobily.\n\nKniha naučí čtenáře, jehož znalosti jazyka Python jsou na střední úrovni, navrhovat v tomto jazyku hluboce se učící systémy s pomocí knihoven Keras a TensorFlow, které používá většina autorů vítězných systémů ze soutěží v hlubokém učení. Výklad je založený na intuitivních vysvětleních a praktických příkladech. Náročné koncepty si procvičíte na aplikacích v oblasti počítačového vidění, zpracování přirozeného jazyka a generativních modelů. Získáte tak znalosti a praktické dovednosti, které vám umožní aplikovat hluboké učení ve vlastních projektech.\nAutorem knihy je François Chollet, tvůrce knihovny Keras a výzkumník v oblasti umělé inteligence společnosti Google.",
+      "author": 1,
+      "publication_date": "2023-01-01"
+    }
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "model": "udigital.comment",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "post": 1,
+      "timestamp": "2023-01-01T00:10:00+00:00",
+      "comment": "Super"
+    }
+  },
+  {
+    "model": "udigital.comment",
+    "pk": 2,
+    "fields": {
+      "user": 2,
+      "post": 2,
+      "timestamp": "2023-01-01T00:10:00+00:00",
+      "comment": "Cool"
+    }
+  }
+]
