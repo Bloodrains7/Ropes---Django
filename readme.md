@@ -15,3 +15,14 @@ Implement a Celery task that runs periodically to delete comments older than a c
 
 ## Testing: 
 Write basic tests for your models and views.
+
+# Instance
+
+## Run with build
+docker-compose up --build
+
+## Run
+docker-compose up
+
+## Stop
+docker-compose down
