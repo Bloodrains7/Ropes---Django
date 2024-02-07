@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from views import list_posts, create_post, edit_post, create_comment
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('posts/', list_posts, name='list_posts'),
+    path('posts/create/', create_post, name='create_post'),
+    path('posts/<int:pk>/edit/', edit_post, name='edit_post'),
+    path('posts/<int:pk>/addComment/', create_comment, name='create_comment'),
+    path('admin/', admin.site.urls)
 ]
