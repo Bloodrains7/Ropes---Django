@@ -20,8 +20,8 @@ from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
 from rest_framework import permissions
 
-from udigital.views import list_posts, create_post, create_comment, PostListView, PostDetailView, \
-    PostCreateView, CommentCreateView, detail_post
+from udigital.views import list_posts, post_create, comment_create, PostListView, PostDetailView, \
+    PostCreateView, CommentCreateView, post_detail
 
 schema_view = swagger_get_schema_view(
     openapi.Info(
@@ -36,10 +36,10 @@ schema_view = swagger_get_schema_view(
 urlpatterns = [
     path('', list_posts, name='list_posts'),
     path('post/', include([
-        path('create/', create_post, name='create_post'),
+        path('create/', post_create, name='post_create'),
         path('<int:pk>', include([
-            path('', detail_post, name='post_detail'),
-            path('addComment/', create_comment, name='create_comment'),
+            path('', post_detail, name='post_detail'),
+            path('addComment/', comment_create, name='comment_create'),
         ]))
     ])),
     path('api/', include([

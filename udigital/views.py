@@ -1,12 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
-from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, get_object_or_404
+from rest_framework.generics import ListAPIView, get_object_or_404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from udigital.forms import PostForm, CommentForm
-from udigital.models import Post, Comment
+from udigital.models import Post
 from udigital.serializer import PostListSerializer, PostDetailSerializer, PostCreateSerializer, CommentCreateSerializer
 from udigital.swagger import accept_language, posts_response, success_response, post_response, id_param, \
     create_post_request, create_comment_request
@@ -18,34 +17,42 @@ def list_posts(request):
     return render(request, 'posts/list.html', context)
 
 
-def detail_post(request, pk):
+def post_detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     context = {'post': post}
     return render(request, 'post/detail.html', context)
 
 
-def create_post(request):
+def post_create(request):
     if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('list_posts')
-        else:
-            form = PostForm()
-        context = {'form': form}
-        return render(request, 'post/add.html', context)
+        data = {
+            'title': request.POST.get('title'),
+            'content': request.POST.get('content'),
+            'author_id': 1,
+            'publication_date': request.POST.get('publicationDate')
+        }
+        serializer = PostCreateSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+    posts = Post.objects.all()
+    context = {'posts': posts}
+    return render(request, 'posts/list.html', context)
 
 
-def create_comment(request):
-    if request.method == 'POST':
-        form = CommentForm(request)
-        if form.is_valid():
-            form.save()
-            return redirect('post')
-    else:
-        form = CommentForm()
-    context = {'form': form}
-    return render(request, 'post/details.html', context)
+def comment_create(request, pk):
+    if request.method == "POST":
+        data = {
+            'comment': request.POST.get('comment'),
+            'user_id': 2,
+            'post_id': pk
+        }
+        serializer = CommentCreateSerializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+    post = get_object_or_404(Post, pk=pk)
+    context = {'post': post}
+    return render(request, 'post/detail.html', context)
 
 
 class PostListView(ListAPIView):

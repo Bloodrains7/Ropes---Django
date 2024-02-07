@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'reversion',
     'rest_framework',
     'drf_yasg',
@@ -153,3 +154,7 @@ CELERY_BEAT_SCHEDULE = {
         "schedule": crontab(hour=0, minute=0),
     }
 }
+
+CRONJOBS = [
+    ('*/5 * * * *', 'udigital.tasks.delete_old_comments'),
+]
