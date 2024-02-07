@@ -39,12 +39,12 @@ urlpatterns = [
     path('posts/<int:pk>/edit/', edit_post, name='edit_post'),
     path('posts/<int:pk>/addComment/', create_comment, name='create_comment'),
     path('api/', include([
-        path('posts', PostListView.as_view()),
+        path('posts', PostListView.as_view(), name='list_posts_view'),
         path('post', include([
-            path('', PostCreateView.as_view()),
+            path('', PostCreateView.as_view(), name='post_create_view'),
             path('/', include([
-                path('<int:pk>', PostDetailView.as_view()),
-                path('create/comment', CommentCreateView.as_view())
+                path('<int:pk>', PostDetailView.as_view(), name='post_detail_view'),
+                path('create/comment', CommentCreateView.as_view(), name='comment_create_view')
             ]))
         ]))
     ])),

@@ -91,7 +91,6 @@ class PostCreateView(APIView):
                          request_body=create_post_request,
                          responses={201: success_response})
     def post(self, request):
-        print(request.data)
         serializer = PostCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -106,7 +105,7 @@ class CommentCreateView(APIView):
                          request_body=create_comment_request,
                          responses={201: success_response})
     def post(self, request):
-        print(request.data)
+        print(request)
         serializer = CommentCreateSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

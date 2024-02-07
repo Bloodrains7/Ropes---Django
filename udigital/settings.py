@@ -54,6 +54,8 @@ MIDDLEWARE = [
     'udigital.middleware.CamelCaseMiddleWare',
 ]
 
+USE_TEST_MIDDLEWARE = True
+
 ROOT_URLCONF = 'udigital.urls'
 
 TEMPLATES = [

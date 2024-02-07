@@ -1,11 +1,10 @@
-from django_reverse_admin import ReverseModelAdmin
 from django.contrib import admin
 
 from udigital.forms import UserAdminForm
 from udigital.models import User, Post, Comment
 
 
-class UserAdmin(ReverseModelAdmin):
+class UserAdmin(admin.ModelAdmin):
     inline_type = 'stacked'
     inline_reverse = ['phone_number']
     list_display = (

@@ -6,6 +6,8 @@ import time
 from djangorestframework_camel_case.settings import api_settings
 from djangorestframework_camel_case.util import underscoreize
 
+from udigital import settings
+
 request_logger = logging.getLogger('main')
 
 
@@ -16,6 +18,9 @@ class CamelCaseMiddleWare:
         self.get_response = get_response
 
     def __call__(self, request):
+        if not settings.USE_TEST_MIDDLEWARE:
+            return self.get_response(request)
+
         request.GET = underscoreize(
             request.GET,
             **api_settings.JSON_UNDERSCOREIZE
