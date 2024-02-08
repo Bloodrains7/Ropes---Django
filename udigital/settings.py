@@ -11,8 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import environ
 
-from celery.schedules import crontab
+env = environ.Env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -146,15 +147,15 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_BEAT_SCHEDULE = {
-    "delete_old_comments": {
-        "task": "udigital.tasks.delete_old_comments",
-        # Run the task every day at midnight.
-        "schedule": crontab(hour=0, minute=0),
-    }
-}
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_BEAT_SCHEDULE = {
+#     "delete_old_comments": {
+#         "task": "udigital.tasks.delete_old_comments",
+#         # Run the task every day at midnight.
+#         "schedule": crontab(hour=0, minute=0),
+#     }
+# }
 
 CRONJOBS = [
-    ('*/5 * * * *', 'udigital.tasks.delete_old_comments'),
+    ('*/1 * * * *', 'udigital.tasks.delete_old_comments', '>> /cron/django_cron.log 2>&1'),
 ]
