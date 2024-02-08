@@ -13,7 +13,7 @@ from udigital.models import Comment
 #     Comment.objects.filter(timestamp__lte=past_date).delete()
 
 def delete_old_comments():
-    print("Deleting old comments...")
+    print(timezone.now(), "Deleting old comments...")
     threshold = timedelta(minutes=1)
     past_date = timezone.now() - threshold
     Comment.objects.filter(timestamp__lte=past_date).delete()

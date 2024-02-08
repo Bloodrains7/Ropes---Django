@@ -7,60 +7,74 @@
     <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container mx-auto">
-        <div class="flex flex-col">
-            <h1 class="text-3xl font-bold">{{ post.title }}</h1>
-            <p class="text-gray-700">Autor: {{ post.author }}</p>
-            <p class="text-gray-500">Dátum publikovania: {{ post.publication_date }}</p>
-            <div>
-                {{ post.content }}
-            </div>    
-        
-            <div class="mt-4">
-                <h2>Komentáre</h2>
-                {% for comment in post.comments.all %}
+<div class="container mx-auto">
+    <div class="flex flex-col">
+        <h1 class="text-3xl font-bold">{{ post.title }}</h1>
+        <p class="text-gray-700">Autor: {{ post.author }}</p>
+        <p class="text-gray-500">Dátum publikovania: {{ post.publication_date }}</p>
+        <div>
+            {{ post.content }}
+        </div>
+
+        <div class="mt-4">
+            <h2>Komentáre</h2>
+            {% for comment in post.comments.all %}
                 <div class="border-b border-gray-200 p-4">
                     <p class="text-gray-700">{{ comment.user }}</p>
                     <p class="text-gray-500">{{ comment.comment }}</p>
                 </div>
-                {% endfor %}
+            {% endfor %}
+        </div>
+
+        <div class="mt-8">
+            <div class="flex justify-between">
+                <a href="{% url 'list_posts' %}"
+                   class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Späť</a>
+                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+                        id="open-modal">Pridať komentár
+                </button>
             </div>
 
-            <div class="mt-8">
-                <button type="button" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg" id="open-modal">Pridať komentár</button>
-
-                <div id="modal" class="hidden overflow-y-auto fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
-                    <div class="bg-white rounded-lg shadow-lg p-4 w-full max-w-md">
-                        <h2 class="text-xl font-bold mb-4">Pridať komentár</h2>
-                        <form action="{% url 'comment_create' post.pk %}" method="post">
-                            {% csrf_token %}
-                            <div class="mb-4">
-                                <label for="comment" class="block text-gray-700 font-bold mb-2">Komentár</label>
-                                <textarea name="comment" id="comment" rows="4" class="border border-gray-300 rounded-lg w-full p-2"></textarea>
-                            </div>
-                            <div class="flex justify-end">
-                                <button type="button" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg mr-2" id="close-modal">Zavrieť</button>
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Pridať komentár</button>
-                            </div>
-                        </form>
-                    </div>
+            <div id="modal"
+                 class="hidden overflow-y-auto fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+                <div class="bg-white rounded-lg shadow-lg p-4 w-full max-w-md">
+                    <h2 class="text-xl font-bold mb-4">Pridať komentár</h2>
+                    <form action="{% url 'comment_create' post.pk %}" method="post">
+                        {% csrf_token %}
+                        <div class="mb-4">
+                            <label for="comment" class="block text-gray-700 font-bold mb-2">Komentár</label>
+                            <textarea name="comment" id="comment" rows="4"
+                                      class="border border-gray-300 rounded-lg w-full p-2"></textarea>
+                        </div>
+                        <div class="flex justify-end">
+                            <button type="button"
+                                    class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg mr-2"
+                                    id="close-modal">Zavrieť
+                            </button>
+                            <button type="submit"
+                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
+                                Pridať komentár
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <script>
-        const modal = document.getElementById('modal');
-        const openModal = document.getElementById('open-modal');
-        const closeModal = document.getElementById('close-modal');
+<script>
+    const modal = document.getElementById('modal');
+    const openModal = document.getElementById('open-modal');
+    const closeModal = document.getElementById('close-modal');
 
-        openModal.addEventListener('click', () => {
-            modal.classList.remove('hidden');
-        });
+    openModal.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
 
-        closeModal.addEventListener('click', () => {
-            modal.classList.add('hidden');
-        });
-    </script>
+    closeModal.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+</script>
 </body>
 </html>
