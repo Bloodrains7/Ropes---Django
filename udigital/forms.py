@@ -28,7 +28,7 @@ class UserAdminForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password', 'groups']
+        fields = ['first_name', 'last_name', 'email', 'phone_number', 'password']
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -37,9 +37,3 @@ class UserAdminForm(forms.ModelForm):
         if commit:
             user.save()
         return user
-
-    def clean_groups(self):
-        groups = self.cleaned_data.get('groups')
-        if groups.count() > 1:
-            raise forms.ValidationError("Užívateľ môže byť členom maximálne jednej skupiny.")
-        return groups

@@ -1,10 +1,10 @@
 from django.contrib import admin
-
+from django_reverse_admin import ReverseModelAdmin
 from udigital.forms import UserAdminForm
 from udigital.models import User, Post, Comment
 
 
-class UserAdmin(admin.ModelAdmin):
+class UserAdmin(ReverseModelAdmin):
     inline_type = 'stacked'
     inline_reverse = ['phone_number']
     list_display = (
@@ -52,6 +52,9 @@ class CommentAdmin(admin.ModelAdmin):
 
     def get_ordering(self, request):
         return ('-timestamp',)
+
+    def has_add_permission(self, request, obj=None):
+        return False
 
     def has_delete_permission(self, request, obj=None):
         return False
