@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'reversion',
     'rest_framework',
     'drf_yasg',
-    'udigital.apps.UdigitalConfig'
+    'udigital.apps.UdigitalConfig',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [

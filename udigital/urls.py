@@ -18,8 +18,10 @@ from django.contrib import admin
 from django.urls import path, include
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
+from graphene_django.views import GraphQLView
 from rest_framework import permissions
 
+from udigital.schema import schema
 from udigital.views import list_posts, post_create, comment_create, PostListView, PostDetailView, \
     PostCreateView, CommentCreateView, post_detail
 
@@ -53,5 +55,6 @@ urlpatterns = [
         ]))
     ])),
     path('api/v1/swagger', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
+    path("graphql/", GraphQLView.as_view(graphiql=True, schema=schema)),
     path('admin/', admin.site.urls)
 ]
