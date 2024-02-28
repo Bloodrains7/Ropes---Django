@@ -4,8 +4,6 @@
 Define models for users, posts, and comments. The Post model should include fields like title, content, author (a relation to the user), and publication date. 
 The Comment model should relate to both the post and the user, including fields for the comment text and timestamp. 
 
-![UML](udigital.png)
-
 ## Views and URLs:
 Implement views for listing all posts, viewing a single post with comments, creating new posts, and adding comments to a post. Ensure proper URL configurations. 
 
